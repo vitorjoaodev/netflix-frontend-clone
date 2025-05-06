@@ -87,8 +87,11 @@ const ContentRow = ({
       <section className="netflix-row mb-8">
         <h2 className="netflix-row-title pl-4">{title}</h2>
         <div className="relative group">
-          <div className="carousel flex overflow-x-auto scrollbar-hide gap-2 pl-4 pr-4 pb-4"
-               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div className="carousel flex overflow-x-auto gap-2 pl-4 pr-4 pb-4 hide-scrollbar"
+               style={{ 
+                WebkitOverflowScrolling: 'touch',
+                scrollBehavior: 'smooth'
+               }}>
             {[...Array(6)].map((_, i) => (
               <div 
                 key={i} 
@@ -119,8 +122,11 @@ const ContentRow = ({
         
         <div 
           ref={sliderRef} 
-          className="carousel flex overflow-x-auto scrollbar-hide gap-2 pl-4 pr-4 pb-4 snap-x"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          className="carousel flex overflow-x-auto gap-2 pl-4 pr-4 pb-4 snap-x hide-scrollbar"
+          style={{ 
+            WebkitOverflowScrolling: 'touch',
+            scrollBehavior: 'smooth'
+          }}
         >
           {items.map((item, index) => (
             <div key={item.id} className="flex-shrink-0 snap-start">

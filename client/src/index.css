@@ -111,4 +111,14 @@
   .netflix-nav-item.active {
     @apply font-bold text-white;
   }
+  
+  /* Esconder barras de rolagem */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
 }
