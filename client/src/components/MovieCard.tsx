@@ -21,31 +21,11 @@ const MovieCard = ({
   isTop10 = false
 }: MovieCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isTrailerPlaying, setIsTrailerPlaying] = useState(false);
-  const [showPoster, setShowPoster] = useState(true);
   
   const title = 'title' in item ? item.title : item.name;
   const releaseDate = 'release_date' in item ? item.release_date : item.first_air_date;
   const posterPath = item.poster_path;
   const backdropPath = item.backdrop_path;
-  
-  // Simulate a delay before showing the trailer when hovered
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    // Delay the trailer start to simulate loading
-    setTimeout(() => {
-      if (backdropPath) {
-        setShowPoster(false);
-        setIsTrailerPlaying(true);
-      }
-    }, 800);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setIsTrailerPlaying(false);
-    setShowPoster(true);
-  };
   
   // Calculate match percentage (mocked for demonstration)
   const match = Math.floor(Math.random() * 15) + 85;
@@ -71,67 +51,26 @@ const MovieCard = ({
     <div className="flex flex-col relative">
       <div 
         className="netflix-card flex-none w-[160px] sm:w-[180px] md:w-[200px] relative rounded overflow-hidden hover:z-10"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         style={{
-          transform: isHovered ? 'scale(1.5)' : 'scale(1)',
+          transform: isHovered ? 'scale(1.1)' : 'scale(1)',
           transition: 'all 0.3s ease',
-          aspectRatio: isHovered && isTrailerPlaying ? '16/9' : '2/3',
+          aspectRatio: '2/3',
           borderRadius: isHovered ? '4px' : '0',
           boxShadow: isHovered ? '0 0 10px rgba(0,0,0,0.5)' : 'none',
           zIndex: isHovered ? '50' : '1'
         }}
       >
-        {showPoster ? (
-          <img 
-            src={getImageUrl(posterPath, 'w500')} 
-            alt={title} 
-            className="w-full h-auto object-cover aspect-[2/3]"
-            loading="lazy"
-          />
-        ) : (
-          <div className="w-full h-full">
-            {/* Trailer video */}
-            <div 
-              className="w-full aspect-video bg-cover bg-center relative transition-all duration-300"
-              style={{ 
-                aspectRatio: '16/9',
-              }}
-            >
-              {/* Actual video player - YouTube embed simulando trailer da Netflix */}
-              {isTrailerPlaying && (
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src={`https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&modestbranding=1&playlist=dQw4w9WgXcQ`}
-                  title={`${title} trailer`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              )}
-
-              {/* Fallback se o vídeo não carregar */}
-              {!isTrailerPlaying && (
-                <div 
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ 
-                    backgroundImage: `url(${getImageUrl(backdropPath || posterPath, 'w780')})`,
-                  }}
-                ></div>
-              )}
-
-              {/* UI elements para o player */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/0">
-                <div className="absolute top-1 right-1 bg-black/70 text-white px-1 text-xs rounded">
-                  {isTrailerPlaying ? "Preview" : ""}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        <img 
+          src={getImageUrl(posterPath, 'w500')} 
+          alt={title} 
+          className="w-full h-auto object-cover aspect-[2/3]"
+          loading="lazy"
+        />
         
         {/* Top 10 badge */}
-        {isTop10 && index !== undefined && !isTrailerPlaying && (
+        {isTop10 && index !== undefined && (
           <div className="top-10-badge">
             <span className="text-netflix-gold">{index + 1}</span>
           </div>
