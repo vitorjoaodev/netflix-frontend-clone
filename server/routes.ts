@@ -31,7 +31,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           {
             id: 1,
             name: "User",
-            avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120"
+            avatar: "/assets/yble0xDFerMYRYRz9uUgrVhnBrzVULNvCX38QH1za_U.webp"
           }
         ]
       });
@@ -74,23 +74,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
         profiles: [
           {
             id: 1,
-            name: "User",
-            avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120"
+            name: "John",
+            avatar: "/assets/yble0xDFerMYRYRz9uUgrVhnBrzVULNvCX38QH1za_U.webp"
           },
           {
             id: 2,
             name: "Sarah",
-            avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120"
+            avatar: "/assets/netflix-profile-pictures-5yup5hd2i60x7ew3.jpg"
           },
           {
             id: 3,
             name: "Michael",
-            avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120"
+            avatar: "/assets/323ecca68b7105d23184e783b86b0c5a.jpg"
           },
           {
             id: 4,
             name: "Kids",
-            avatar: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120"
+            avatar: "/assets/Screenshot+2024-09-25+at+1.42.30 PM.png"
           }
         ]
       });
@@ -117,22 +117,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         {
           id: 1,
           name: "John",
-          avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120"
+          avatar: "/assets/yble0xDFerMYRYRz9uUgrVhnBrzVULNvCX38QH1za_U.webp"
         },
         {
           id: 2,
           name: "Sarah",
-          avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120"
+          avatar: "/assets/netflix-profile-pictures-5yup5hd2i60x7ew3.jpg"
         },
         {
           id: 3,
           name: "Michael",
-          avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120"
+          avatar: "/assets/323ecca68b7105d23184e783b86b0c5a.jpg"
         },
         {
           id: 4,
           name: "Kids",
-          avatar: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120"
+          avatar: "/assets/Screenshot+2024-09-25+at+1.42.30 PM.png"
         }
       ]
     });
