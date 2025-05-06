@@ -47,14 +47,15 @@ const MovieCard = ({
   ][Math.floor(Math.random() * 5)];
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col relative">
       <div 
         className="netflix-card flex-none w-[160px] sm:w-[180px] md:w-[200px] relative rounded overflow-hidden hover:z-10"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         style={{
           transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-          transition: 'transform 0.3s ease'
+          transition: 'transform 0.3s ease',
+          aspectRatio: '2/3'
         }}
       >
         <img 
