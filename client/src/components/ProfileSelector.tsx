@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import AvatarSelector from "./AvatarSelector";
+import AvatarSelector from "@/components/AvatarSelector";
 
 interface ProfileSelectorProps {
   onProfileSelect?: (profileId: number) => void;

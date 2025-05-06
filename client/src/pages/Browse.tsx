@@ -20,6 +20,7 @@ import {
   MoviesResponse,
   TvShowsResponse
 } from "@/lib/tmdb";
+import { filterBlacklistedContent } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const Browse = () => {
@@ -140,8 +141,16 @@ const Browse = () => {
     );
   }
   
+  // Filter blacklisted content from all results
+  const filteredTrending = trending?.results ? filterBlacklistedContent(trending.results) : [];
+  const filteredPopularMovies = popularMovies?.results ? filterBlacklistedContent(popularMovies.results) : [];
+  const filteredTopRatedMovies = topRatedMovies?.results ? filterBlacklistedContent(topRatedMovies.results) : [];
+  const filteredNowPlayingMovies = nowPlayingMovies?.results ? filterBlacklistedContent(nowPlayingMovies.results) : [];
+  const filteredPopularTvShows = popularTvShows?.results ? filterBlacklistedContent(popularTvShows.results) : [];
+  const filteredTopRatedTvShows = topRatedTvShows?.results ? filterBlacklistedContent(topRatedTvShows.results) : [];
+  
   // Get a featured item for the hero from trending
-  const featuredItem = trending?.results?.[0];
+  const featuredItem = filteredTrending[0];
   
   return (
     <div className="min-h-screen bg-netflix-black text-white">
@@ -150,106 +159,106 @@ const Browse = () => {
       <HeroSection featured={featuredItem} />
       
       <main className="pb-20 mt-2 md:mt-0 relative z-10">
-        {/* Top 10 na Netflix Hoje */}
+        {/* Top 10 */}
         <ContentRow 
-          title="Top 10 na Netflix Hoje" 
-          items={(trending?.results || []).slice(0, 10)} 
+          title="Top 10 on Netflix Today" 
+          items={filteredTrending.slice(0, 10)} 
           isLoading={trendingLoading}
           isTop10={true}
         />
         
         <ContentRow 
-          title={`Continue Assistindo: ${currentUser.name}`} 
-          items={nowPlayingMovies?.results?.slice(0, 10) || []} 
+          title={`Continue Watching for ${currentUser.name}`} 
+          items={filteredNowPlayingMovies.slice(0, 10)} 
           isLoading={nowPlayingMoviesLoading}
           showProgress={true}
         />
         
-        {/* Séries específicas solicitadas */}
+        {/* Popular TV Shows */}
         <ContentRow 
           title="Stranger Things" 
-          items={(popularTvShows?.results || []).slice(0, 7)} 
+          items={filteredPopularTvShows.slice(0, 7)} 
           isLoading={popularTvShowsLoading}
           type="tv"
         />
         
         <ContentRow 
-          title="La Casa de Papel" 
-          items={(topRatedTvShows?.results || []).slice(0, 7)} 
+          title="Money Heist" 
+          items={filteredTopRatedTvShows.slice(0, 7)} 
           isLoading={topRatedTvShowsLoading}
           type="tv"
         />
         
         <ContentRow 
-          title="Séries Coreanas" 
-          items={(popularTvShows?.results || []).slice(7, 14)} 
+          title="Korean TV Shows" 
+          items={filteredPopularTvShows.slice(7, 14)} 
           isLoading={popularTvShowsLoading}
           type="tv"
         />
         
         <ContentRow 
           title="Bridgerton" 
-          items={(topRatedTvShows?.results || []).slice(7, 14)} 
+          items={filteredTopRatedTvShows.slice(7, 14)} 
           isLoading={topRatedTvShowsLoading}
           type="tv"
         />
         
         <ContentRow 
           title="The Chosen" 
-          items={(popularTvShows?.results || []).slice(2, 9)} 
+          items={filteredPopularTvShows.slice(2, 9)} 
           isLoading={popularTvShowsLoading}
           type="tv"
         />
         
         <ContentRow 
           title="Cobra Kai" 
-          items={(topRatedTvShows?.results || []).slice(3, 10)} 
+          items={filteredTopRatedTvShows.slice(3, 10)} 
           isLoading={topRatedTvShowsLoading}
           type="tv"
         />
         
-        {/* Filmes recentes solicitados */}
+        {/* Recent Movies */}
         <ContentRow 
-          title="A Lista da Minha Vida" 
-          items={(nowPlayingMovies?.results || []).slice(0, 7)} 
+          title="Your Life List" 
+          items={filteredNowPlayingMovies.slice(0, 7)} 
           isLoading={nowPlayingMoviesLoading}
         />
         
         <ContentRow 
-          title="O Mundo Depois de Nós" 
-          items={(popularMovies?.results || []).slice(3, 10)} 
+          title="Leave the World Behind" 
+          items={filteredPopularMovies.slice(3, 10)} 
           isLoading={popularMoviesLoading} 
         />
         
         <ContentRow 
-          title="O Projeto Adam" 
-          items={(topRatedMovies?.results || []).slice(3, 10)} 
+          title="The Adam Project" 
+          items={filteredTopRatedMovies.slice(3, 10)} 
           isLoading={topRatedMoviesLoading} 
         />
         
-        {/* Categorias de filmes */}
+        {/* Movie Categories */}
         <ContentRow 
-          title="Filmes de Ação" 
-          items={(popularMovies?.results || []).slice(10, 17)} 
+          title="Action Movies" 
+          items={filteredPopularMovies.slice(10, 17)} 
           isLoading={popularMoviesLoading} 
         />
         
         <ContentRow 
-          title="Dramas Baseados em Livros" 
-          items={(topRatedMovies?.results || []).slice(10, 17)} 
+          title="Book-Based Dramas" 
+          items={filteredTopRatedMovies.slice(10, 17)} 
           isLoading={topRatedMoviesLoading} 
         />
         
         <ContentRow 
-          title="Comédias" 
-          items={(nowPlayingMovies?.results || []).slice(7, 14)} 
+          title="Comedies" 
+          items={filteredNowPlayingMovies.slice(7, 14)} 
           isLoading={nowPlayingMoviesLoading}
         />
         
-        {/* Em alta - usar trending */}
+        {/* Trending */}
         <ContentRow 
-          title="Em Alta" 
-          items={trending?.results || []} 
+          title="Trending Now" 
+          items={filteredTrending} 
           isLoading={trendingLoading} 
         />
       </main>
