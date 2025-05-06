@@ -6,8 +6,20 @@ import { useAuth } from "@/context/AuthContext";
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { currentUser, profiles, logout } = useAuth();
-  const [location] = useLocation();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("home");
+  const { currentUser, profiles, logout, setCurrentProfile } = useAuth();
+  const [location, setLocation] = useLocation();
+
+  // Parse the current location to determine active category
+  useEffect(() => {
+    if (location.includes("?category=")) {
+      const category = location.split("?category=")[1];
+      setActiveCategory(category);
+    } else if (location === "/browse") {
+      setActiveCategory("home");
+    }
+  }, [location]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,10 +39,25 @@ const Header = () => {
     return null;
   }
 
+  const handleNavigation = (category: string) => {
+    if (category === "home") {
+      setLocation("/browse");
+    } else {
+      setLocation(`/browse?category=${category}`);
+    }
+    setActiveCategory(category);
+  };
+
+  const handleProfileSelect = (profileId: number) => {
+    if (setCurrentProfile) {
+      setCurrentProfile(profileId);
+    }
+  };
+
   return (
     <header
-      className={`fixed w-full z-50 px-4 py-4 flex items-center justify-between transition-all duration-300 ${
-        isScrolled ? "bg-netflix-black" : "bg-gradient-to-b from-black/70 to-transparent"
+      className={`netflix-header fixed w-full z-50 px-4 py-4 flex items-center justify-between transition-all duration-300 ${
+        isScrolled ? "bg-netflix-black" : ""
       }`}
     >
       <div className="flex items-center">
@@ -44,25 +71,43 @@ const Header = () => {
         </div>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex space-x-4 text-sm">
-          <Link href="/browse" className="hover:text-gray-300 font-semibold text-white">
+        <nav className="hidden md:flex space-x-6">
+          <button 
+            onClick={() => handleNavigation("home")} 
+            className={`netflix-nav-item ${activeCategory === "home" ? "active" : ""}`}
+          >
             Home
-          </Link>
-          <Link href="/browse?category=tv" className="hover:text-gray-300 text-white">
+          </button>
+          <button 
+            onClick={() => handleNavigation("tv")} 
+            className={`netflix-nav-item ${activeCategory === "tv" ? "active" : ""}`}
+          >
             TV Shows
-          </Link>
-          <Link href="/browse?category=movies" className="hover:text-gray-300 text-white">
+          </button>
+          <button 
+            onClick={() => handleNavigation("movies")} 
+            className={`netflix-nav-item ${activeCategory === "movies" ? "active" : ""}`}
+          >
             Movies
-          </Link>
-          <Link href="/browse?category=new" className="hover:text-gray-300 text-white">
+          </button>
+          <button 
+            onClick={() => handleNavigation("new")} 
+            className={`netflix-nav-item ${activeCategory === "new" ? "active" : ""}`}
+          >
             New & Popular
-          </Link>
-          <Link href="/browse?category=mylist" className="hover:text-gray-300 text-white">
+          </button>
+          <button 
+            onClick={() => handleNavigation("mylist")} 
+            className={`netflix-nav-item ${activeCategory === "mylist" ? "active" : ""}`}
+          >
             My List
-          </Link>
-          <Link href="/browse?category=languages" className="hover:text-gray-300 text-white">
+          </button>
+          <button 
+            onClick={() => handleNavigation("languages")} 
+            className={`netflix-nav-item ${activeCategory === "languages" ? "active" : ""}`}
+          >
             Browse by Languages
-          </Link>
+          </button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -76,38 +121,77 @@ const Header = () => {
 
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="absolute top-16 left-0 w-full bg-black bg-opacity-90 md:hidden">
+          <div className="absolute top-16 left-0 w-full bg-black bg-opacity-95 md:hidden z-50">
             <div className="flex flex-col py-4 px-4">
-              <Link href="/browse" className="py-2 hover:text-gray-300 text-white">
+              <button 
+                onClick={() => {handleNavigation("home"); setIsMenuOpen(false);}} 
+                className={`py-2 text-left ${activeCategory === "home" ? "text-white font-bold" : "text-gray-300"}`}
+              >
                 Home
-              </Link>
-              <Link href="/browse?category=tv" className="py-2 hover:text-gray-300 text-white">
+              </button>
+              <button 
+                onClick={() => {handleNavigation("tv"); setIsMenuOpen(false);}} 
+                className={`py-2 text-left ${activeCategory === "tv" ? "text-white font-bold" : "text-gray-300"}`}
+              >
                 TV Shows
-              </Link>
-              <Link href="/browse?category=movies" className="py-2 hover:text-gray-300 text-white">
+              </button>
+              <button 
+                onClick={() => {handleNavigation("movies"); setIsMenuOpen(false);}} 
+                className={`py-2 text-left ${activeCategory === "movies" ? "text-white font-bold" : "text-gray-300"}`}
+              >
                 Movies
-              </Link>
-              <Link href="/browse?category=new" className="py-2 hover:text-gray-300 text-white">
+              </button>
+              <button 
+                onClick={() => {handleNavigation("new"); setIsMenuOpen(false);}} 
+                className={`py-2 text-left ${activeCategory === "new" ? "text-white font-bold" : "text-gray-300"}`}
+              >
                 New & Popular
-              </Link>
-              <Link href="/browse?category=mylist" className="py-2 hover:text-gray-300 text-white">
+              </button>
+              <button 
+                onClick={() => {handleNavigation("mylist"); setIsMenuOpen(false);}} 
+                className={`py-2 text-left ${activeCategory === "mylist" ? "text-white font-bold" : "text-gray-300"}`}
+              >
                 My List
-              </Link>
-              <Link href="/browse?category=languages" className="py-2 hover:text-gray-300 text-white">
+              </button>
+              <button 
+                onClick={() => {handleNavigation("languages"); setIsMenuOpen(false);}} 
+                className={`py-2 text-left ${activeCategory === "languages" ? "text-white font-bold" : "text-gray-300"}`}
+              >
                 Browse by Languages
-              </Link>
+              </button>
             </div>
           </div>
         )}
       </div>
 
       <div className="flex items-center space-x-4">
-        <button className="text-white">
-          <FaSearch className="text-lg" />
-        </button>
-        <button className="hidden sm:block text-white hover:text-gray-300 text-sm">
+        {/* Search bar */}
+        <div className="relative">
+          {isSearchOpen ? (
+            <div className="flex items-center bg-black bg-opacity-70 border border-white rounded-sm">
+              <FaSearch className="text-white ml-2" />
+              <input 
+                autoFocus
+                type="text" 
+                placeholder="Títulos, pessoas, gêneros" 
+                className="bg-transparent border-none text-white text-sm px-2 py-1 w-40 focus:outline-none"
+                onBlur={() => setIsSearchOpen(false)}
+              />
+            </div>
+          ) : (
+            <button className="text-white" onClick={() => setIsSearchOpen(true)}>
+              <FaSearch className="text-lg" />
+            </button>
+          )}
+        </div>
+        
+        <button 
+          onClick={() => handleNavigation("kids")}
+          className="hidden sm:block netflix-nav-item"
+        >
           Kids
         </button>
+        
         <button className="text-white">
           <FaBell className="text-lg" />
         </button>
@@ -128,18 +212,22 @@ const Header = () => {
             <FaCaretDown className="ml-2 text-xs transition-transform group-hover:rotate-180" />
           </button>
 
-          <div className="absolute right-0 mt-2 w-48 bg-black bg-opacity-90 border border-gray-700 rounded py-2 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+          <div className="absolute right-0 mt-2 w-48 bg-black bg-opacity-95 border border-gray-700 rounded py-2 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
             {/* Other profiles */}
             {profiles && profiles.map((profile) => (
               profile.id !== currentUser?.id && (
-                <div key={profile.id} className="px-4 py-2 flex items-center hover:underline cursor-pointer">
+                <button 
+                  key={profile.id} 
+                  className="px-4 py-2 flex items-center hover:underline cursor-pointer w-full text-left"
+                  onClick={() => handleProfileSelect(profile.id)}
+                >
                   <img 
                     src={profile.avatar} 
                     alt={profile.name} 
                     className="w-7 h-7 rounded mr-3" 
                   />
                   <span className="text-sm">{profile.name}</span>
-                </div>
+                </button>
               )
             ))}
 

@@ -8,13 +8,17 @@ interface MovieCardProps {
   showProgress?: boolean;
   progress?: number;
   type?: 'movie' | 'tv';
+  index?: number;
+  isTop10?: boolean;
 }
 
 const MovieCard = ({ 
   item, 
   showProgress = false, 
   progress = Math.floor(Math.random() * 90) + 10,
-  type = 'movie'
+  type = 'movie',
+  index,
+  isTop10 = false
 }: MovieCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   

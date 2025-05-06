@@ -3,49 +3,55 @@
 @tailwind utilities;
 
 :root {
-      --background: 0 0% 100%;
---foreground: 20 14.3% 4.1%;
---muted: 60 4.8% 95.9%;
---muted-foreground: 25 5.3% 44.7%;
---popover: 0 0% 100%;
---popover-foreground: 20 14.3% 4.1%;
---card: 0 0% 100%;
---card-foreground: 20 14.3% 4.1%;
---border: 20 5.9% 90%;
---input: 20 5.9% 90%;
---primary: 207 90% 54%;
---primary-foreground: 211 100% 99%;
---secondary: 60 4.8% 95.9%;
---secondary-foreground: 24 9.8% 10%;
---accent: 60 4.8% 95.9%;
---accent-foreground: 24 9.8% 10%;
---destructive: 0 84.2% 60.2%;
---destructive-foreground: 60 9.1% 97.8%;
---ring: 20 14.3% 4.1%;
---radius: 0.5rem;
-  }
-  .dark {
-      --background: 240 10% 3.9%;
---foreground: 0 0% 98%;
---muted: 240 3.7% 15.9%;
---muted-foreground: 240 5% 64.9%;
---popover: 240 10% 3.9%;
---popover-foreground: 0 0% 98%;
---card: 240 10% 3.9%;
---card-foreground: 0 0% 98%;
---border: 240 3.7% 15.9%;
---input: 240 3.7% 15.9%;
---primary: 207 90% 54%;
---primary-foreground: 211 100% 99%;
---secondary: 240 3.7% 15.9%;
---secondary-foreground: 0 0% 98%;
---accent: 240 3.7% 15.9%;
---accent-foreground: 0 0% 98%;
---destructive: 0 62.8% 30.6%;
---destructive-foreground: 0 0% 98%;
---ring: 240 4.9% 83.9%;
---radius: 0.5rem;
-  }
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 0 74% 42%; /* Netflix Red */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 60 4.8% 95.9%;
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 60 4.8% 95.9%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+  --netflix-red: 357 92% 47%;
+  --netflix-black: 0 0% 8%;
+  --netflix-dark-gray: 0 0% 11%;
+  --netflix-light-black: 0 0% 13%;
+  --netflix-gold: 36 100% 58%;
+}
+
+.dark {
+  --background: 0 0% 8%; /* Netflix Black */
+  --foreground: 0 0% 100%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 70%;
+  --popover: 0 0% 8%;
+  --popover-foreground: 0 0% 100%;
+  --card: 0 0% 8%;
+  --card-foreground: 0 0% 100%;
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  --primary: 357 92% 47%; /* Netflix Red */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 0 0% 15%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 0 0% 83.9%;
+  --radius: 0.25rem;
+}
 
 @layer base {
   * {
@@ -53,6 +59,52 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-netflix-black text-foreground;
+  }
+  
+  /* Estilos Netflix */
+  .netflix-card {
+    @apply bg-netflix-light-black relative transition-all duration-200 overflow-hidden rounded-md;
+  }
+  
+  .netflix-card:hover {
+    @apply scale-105 z-10 shadow-xl;
+  }
+  
+  .netflix-card-content {
+    @apply absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent opacity-0 transition-opacity;
+  }
+  
+  .netflix-card:hover .netflix-card-content {
+    @apply opacity-100;
+  }
+  
+  .netflix-header {
+    @apply bg-gradient-to-b from-black/80 to-transparent absolute top-0 left-0 right-0 z-50;
+  }
+  
+  .netflix-main-section {
+    @apply min-h-screen bg-netflix-black;
+  }
+  
+  .netflix-row {
+    @apply py-6;
+  }
+  
+  .netflix-row-title {
+    @apply text-xl md:text-2xl font-bold text-white mb-4 pl-4;
+  }
+  
+  .top-10-badge {
+    @apply absolute top-0 left-0 w-12 h-12 flex items-center justify-center text-netflix-gold font-bold text-2xl;
+  }
+  
+  /* Estilos de navegação */
+  .netflix-nav-item {
+    @apply cursor-pointer text-gray-300 hover:text-white transition-colors text-sm md:text-base;
+  }
+  
+  .netflix-nav-item.active {
+    @apply font-bold text-white;
   }
 }

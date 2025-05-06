@@ -44,6 +44,13 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        netflix: {
+          red: "hsl(var(--netflix-red))",
+          black: "hsl(var(--netflix-black))",
+          "dark-gray": "hsl(var(--netflix-dark-gray))",
+          "light-black": "hsl(var(--netflix-light-black))",
+          gold: "hsl(var(--netflix-gold))",
+        },
         chart: {
           "1": "hsl(var(--chart-1))",
           "2": "hsl(var(--chart-2))",
