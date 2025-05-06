@@ -24,6 +24,7 @@ interface AuthContextType {
   addProfile: (name: string) => void;
   deleteProfile: (id: number) => void;
   setCurrentProfile: (id: number) => void;
+  updateProfileAvatar: (profileId: number, avatarUrl: string) => void;
 }
 
 // Sample avatar images
@@ -179,6 +180,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
   
+  const updateProfileAvatar = (profileId: number, avatarUrl: string) => {
+    const updatedProfiles = profiles.map(profile => 
+      profile.id === profileId ? { ...profile, avatar: avatarUrl } : profile
+    );
+    
+    setProfiles(updatedProfiles);
+    
+    if (currentUser?.id === profileId) {
+      setCurrentUser({ ...currentUser, avatar: avatarUrl });
+    }
+    
+    if (user) {
+      setUser({
+        ...user,
+        profiles: updatedProfiles
+      });
+    }
+  };
+  
   // If we don't have a real user yet (during development), create a mock one
   useEffect(() => {
     if (process.env.NODE_ENV === 'development' && !isAuthenticated) {
@@ -210,7 +230,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       logout,
       addProfile,
       deleteProfile,
-      setCurrentProfile: setCurrentProfileById
+      setCurrentProfile: setCurrentProfileById,
+      updateProfileAvatar
     }}>
       {children}
     </AuthContext.Provider>

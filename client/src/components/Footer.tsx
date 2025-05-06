@@ -3,7 +3,7 @@ import { Link } from 'wouter';
 
 const Footer = () => {
   return (
-    <footer className="bg-netflix-black text-netflix-gray py-8 px-4 md:px-16 mt-10">
+    <footer className="bg-netflix-black text-[#737373] py-8 px-4 md:px-16 mt-10">
       <div className="max-w-6xl mx-auto">
         <p className="mb-6 text-base">Questions? Contact us</p>
         
@@ -39,10 +39,17 @@ const Footer = () => {
         </div>
         
         <div className="mb-6">
-          <select className="bg-transparent text-netflix-gray border border-netflix-gray py-1 px-2 rounded-sm text-sm">
-            <option value="en">English</option>
-            <option value="pt">Portuguese</option>
-          </select>
+          <div className="relative inline-block border border-[#737373] rounded">
+            <select className="bg-transparent text-[#737373] py-1 pl-8 pr-6 appearance-none cursor-pointer">
+              <option value="en">English</option>
+              <option value="pt">Portuguese</option>
+            </select>
+            <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 16 16">
+                <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm5.2 4.3l-1.4-1.4L7 7.6 2.2 2.9.8 4.3 7 10.4l6.2-6.1z"/>
+              </svg>
+            </div>
+          </div>
         </div>
         
         <p className="text-sm">Developed by João Vitor Belasque &copy; 2025</p>
