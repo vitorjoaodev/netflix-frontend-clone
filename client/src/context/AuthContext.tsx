@@ -27,13 +27,19 @@ interface AuthContextType {
   updateProfileAvatar: (profileId: number, avatarUrl: string) => void;
 }
 
-// Official Netflix avatar images
-const avatarImages = [
-  'https://occ-0-1339-1340.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABXvWywfWS7XtQC8VHdOJLQYw5DYDZt3T6NvxBK2YZ-gpE_6yIH7VP2-NeBPEM2n7Ddct8EYQat0bm-Kn3v9qyPLY1XSL.png?r=110',
-  'https://occ-0-1339-1340.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABSHZrjJ2hGrDiHLhh7hjHDFQWZIKCPJrM-Wwh2FC9kbLATHoEXUTyzO9iq-Dsj-5UQDDQezOkqFU2wm-PXB-fGo4f1_k.png?r=fcd',
-  'https://occ-0-1339-1340.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABcFszWr4vPYAP2CPx4qzs0D2TDTlayCTtXOCp9T5hbQML6xEf8oybWuQoJOFZhBz0WEBM51Z3rCQSOUht9F9Jxl7k6cR.png?r=a13',
-  'https://occ-0-1339-1340.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABUCq3mMjbcd69jdwHnTaCw1LyFWMJcfM1I7CE9KGDG-0mT6tBsB9p6a3lRQJCXvFfl5OIJGwxU-RAKzYQls1QMzwhDw8.png?r=2db'
-];
+// Avatares personalizados com as imagens anexadas
+import { avatars as customAvatars } from "@/lib/data";
+
+// Avatares específicos para cada perfil
+const profileAvatars = {
+  john: customAvatars[0],    // Robô azul
+  sarah: customAvatars[1],   // Cara sorridente laranja
+  michael: customAvatars[2], // Cara sorridente verde
+  kids: customAvatars[3]     // Logo colorido kids
+};
+
+// Todos os avatares disponíveis para escolha
+const avatarImages = customAvatars;
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -203,10 +209,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (process.env.NODE_ENV === 'development' && !isAuthenticated) {
       const mockProfiles = [
-        { id: 1, name: "John", avatar: "https://i.redd.it/yble0xdfermy.jpg" },
-        { id: 2, name: "Sarah", avatar: "https://wallpapers.com/images/hd/netflix-profile-pictures-5yup5hd2i60x7ew3.jpg" },
-        { id: 3, name: "Michael", avatar: "https://i.pinimg.com/474x/32/3e/cc/323ecca68b7105d23184e783b86b0c5a.jpg" },
-        { id: 4, name: "Kids", avatar: "https://images.squarespace-cdn.com/content/v1/60999fca51ffc84d9d5d7acc/1d47c1c5-3a60-4847-8047-387501b3cee1/Screenshot+2024-09-25+at+1.42.30%E2%80%AFPM.png" },
+        { id: 1, name: "John", avatar: profileAvatars.john },
+        { id: 2, name: "Sarah", avatar: profileAvatars.sarah },
+        { id: 3, name: "Michael", avatar: profileAvatars.michael },
+        { id: 4, name: "Kids", avatar: profileAvatars.kids },
       ];
       
       setProfiles(mockProfiles);
