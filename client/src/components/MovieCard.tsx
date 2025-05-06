@@ -63,6 +63,13 @@ const MovieCard = ({
         loading="lazy"
       />
       
+      {/* Top 10 badge */}
+      {isTop10 && index !== undefined && (
+        <div className="top-10-badge">
+          <span className="text-netflix-gold font-bold text-4xl">{index + 1}</span>
+        </div>
+      )}
+      
       {/* Progress bar for continue watching */}
       {showProgress && (
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-600">

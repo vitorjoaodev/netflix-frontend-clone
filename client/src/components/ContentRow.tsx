@@ -9,6 +9,7 @@ interface ContentRowProps {
   isLoading?: boolean;
   type?: 'movie' | 'tv';
   showProgress?: boolean;
+  isTop10?: boolean;
 }
 
 const ContentRow = ({ 
@@ -16,7 +17,8 @@ const ContentRow = ({
   items, 
   isLoading = false, 
   type = 'movie',
-  showProgress = false 
+  showProgress = false,
+  isTop10 = false
 }: ContentRowProps) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
@@ -70,12 +72,14 @@ const ContentRow = ({
           className="carousel flex space-x-2 overflow-x-auto pb-4"
           onScroll={handleScroll}
         >
-          {items.map((item) => (
+          {items.map((item, index) => (
             <MovieCard 
               key={item.id} 
               item={item} 
               showProgress={showProgress}
               type={type}
+              isTop10={isTop10}
+              index={isTop10 ? index : undefined}
             />
           ))}
         </div>

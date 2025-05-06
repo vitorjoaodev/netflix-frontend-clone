@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import ContentRow from "@/components/ContentRow";
+import MovieCard from "@/components/MovieCard";
 import { 
   fetchTrending, 
   fetchPopularMovies, 
@@ -149,47 +150,75 @@ const Browse = () => {
       <HeroSection featured={featuredItem} />
       
       <main className="pb-20 mt-2 md:mt-0 relative z-10">
+        {/* Top 10 na Netflix Hoje */}
         <ContentRow 
-          title="Popular on Netflix" 
-          items={popularMovies?.results || []} 
-          isLoading={popularMoviesLoading} 
+          title="Top 10 na Netflix Hoje" 
+          items={(trending?.results || []).slice(0, 10)} 
+          isLoading={trendingLoading}
+          isTop10={true}
         />
         
         <ContentRow 
-          title={`Continue Watching for ${currentUser.name}`} 
+          title={`Continue Assistindo: ${currentUser.name}`} 
           items={nowPlayingMovies?.results?.slice(0, 10) || []} 
           isLoading={nowPlayingMoviesLoading}
           showProgress={true}
         />
         
+        {/* Séries coreanas */}
         <ContentRow 
-          title="Trending Now" 
-          items={trending?.results || []} 
-          isLoading={trendingLoading} 
-        />
-        
-        <ContentRow 
-          title="Top Rated Movies" 
-          items={topRatedMovies?.results || []} 
-          isLoading={topRatedMoviesLoading} 
-        />
-        
-        <ContentRow 
-          title="Popular TV Shows" 
-          items={popularTvShows?.results || []} 
+          title="Séries Coreanas" 
+          items={(popularTvShows?.results || []).slice(0, 7)} 
           isLoading={popularTvShowsLoading}
           type="tv"
         />
         
+        {/* Séries aclamadas - usar as top rated TV shows */}
         <ContentRow 
-          title="Top Rated TV Shows" 
+          title="Séries Aclamadas" 
           items={topRatedTvShows?.results || []} 
           isLoading={topRatedTvShowsLoading}
           type="tv"
         />
         
+        {/* Filmes recentes */}
         <ContentRow 
-          title="Top Picks for You" 
+          title="Filmes Recentes" 
+          items={nowPlayingMovies?.results || []} 
+          isLoading={nowPlayingMoviesLoading}
+        />
+        
+        {/* Em alta - usar trending */}
+        <ContentRow 
+          title="Em Alta" 
+          items={trending?.results || []} 
+          isLoading={trendingLoading} 
+        />
+        
+        {/* Filmes de Ação */}
+        <ContentRow 
+          title="Filmes de Ação" 
+          items={(popularMovies?.results || []).slice(5, 15)} 
+          isLoading={popularMoviesLoading} 
+        />
+        
+        {/* Dramas Baseados em Livros */}
+        <ContentRow 
+          title="Dramas Baseados em Livros" 
+          items={(topRatedMovies?.results || []).slice(3, 13)} 
+          isLoading={topRatedMoviesLoading} 
+        />
+        
+        {/* Populares na Netflix */}
+        <ContentRow 
+          title="Populares na Netflix" 
+          items={popularMovies?.results || []} 
+          isLoading={popularMoviesLoading} 
+        />
+        
+        {/* Sugestões para você */}
+        <ContentRow 
+          title="Sugestões para você" 
           items={topRatedMovies?.results?.slice(10, 20) || []} 
           isLoading={topRatedMoviesLoading} 
         />
