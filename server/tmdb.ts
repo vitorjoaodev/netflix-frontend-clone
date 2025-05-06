@@ -5,15 +5,15 @@ class TMDBApi {
   private baseUrl: string;
 
   constructor() {
-    this.apiKey = process.env.TMDB_API_KEY || "3e37235a2f824d0288a894481fdb837b"; // Fallback to a placeholder, you should use your own API key
+    this.apiKey = process.env.TMDB_API_KEY || "";
     this.baseUrl = "https://api.themoviedb.org/3";
   }
 
   private async fetchFromTMDB(endpoint: string) {
-    const url = `${this.baseUrl}${endpoint}`;
+    const separator = endpoint.includes('?') ? '&' : '?';
+    const url = `${this.baseUrl}${endpoint}${separator}api_key=${this.apiKey}`;
     const response = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${this.apiKey}`,
         "Content-Type": "application/json",
       },
     });
