@@ -96,8 +96,10 @@
   }
   
   .top-10-badge {
-    @apply absolute -left-3 top-0 w-14 h-full flex items-center justify-center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    @apply absolute -left-5 top-0 w-14 h-full flex items-center justify-center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-family: 'Arial Black', 'Helvetica Black', sans-serif;
+    font-size: 5rem;
   }
   
   /* Estilos de navegação */

@@ -46,14 +46,14 @@ const ContentRow = ({
   // Handle loading state
   if (isLoading) {
     return (
-      <section className="content-row mb-8 px-4">
-        <h2 className="text-lg md:text-xl font-bold mb-2">{title}</h2>
+      <section className="netflix-row mb-8">
+        <h2 className="netflix-row-title">{title}</h2>
         <div className="relative group">
-          <div className="carousel flex space-x-2 overflow-x-auto pb-4">
+          <div className="carousel flex space-x-2 overflow-x-auto pl-4 pr-4 pb-4">
             {[...Array(6)].map((_, i) => (
               <div 
                 key={i} 
-                className="flex-none w-[160px] sm:w-[180px] md:w-[200px] relative rounded overflow-hidden bg-gray-800 animate-pulse"
+                className="flex-none w-[160px] sm:w-[180px] md:w-[200px] relative rounded overflow-hidden bg-netflix-dark-gray animate-pulse"
                 style={{ aspectRatio: '2/3' }}
               ></div>
             ))}
@@ -64,12 +64,12 @@ const ContentRow = ({
   }
 
   return (
-    <section className="content-row mb-8 px-4">
-      <h2 className="text-lg md:text-xl font-bold mb-2">{title}</h2>
+    <section className="netflix-row mb-8">
+      <h2 className="netflix-row-title">{title}</h2>
       <div className="relative group">
         <div 
           ref={sliderRef} 
-          className="carousel flex space-x-2 overflow-x-auto pb-4"
+          className="carousel flex space-x-2 overflow-x-auto pl-4 pr-4 pb-4"
           onScroll={handleScroll}
         >
           {items.map((item, index) => (
@@ -87,20 +87,20 @@ const ContentRow = ({
         {/* Left Control */}
         {showLeftArrow && (
           <button 
-            className="absolute top-0 bottom-4 left-0 w-12 bg-black bg-opacity-50 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute top-0 bottom-4 left-0 w-16 bg-black bg-opacity-50 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
             onClick={() => scroll('left')}
           >
-            <FaChevronLeft className="text-white text-2xl" />
+            <FaChevronLeft className="text-white text-3xl" />
           </button>
         )}
         
         {/* Right Control */}
         {showRightArrow && (
           <button 
-            className="absolute top-0 bottom-4 right-0 w-12 bg-black bg-opacity-50 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute top-0 bottom-4 right-0 w-16 bg-black bg-opacity-50 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
             onClick={() => scroll('right')}
           >
-            <FaChevronRight className="text-white text-2xl" />
+            <FaChevronRight className="text-white text-3xl" />
           </button>
         )}
       </div>

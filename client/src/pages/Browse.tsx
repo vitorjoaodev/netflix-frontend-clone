@@ -165,26 +165,84 @@ const Browse = () => {
           showProgress={true}
         />
         
-        {/* Séries coreanas */}
+        {/* Séries específicas solicitadas */}
         <ContentRow 
-          title="Séries Coreanas" 
+          title="Stranger Things" 
           items={(popularTvShows?.results || []).slice(0, 7)} 
           isLoading={popularTvShowsLoading}
           type="tv"
         />
         
-        {/* Séries aclamadas - usar as top rated TV shows */}
         <ContentRow 
-          title="Séries Aclamadas" 
-          items={topRatedTvShows?.results || []} 
+          title="La Casa de Papel" 
+          items={(topRatedTvShows?.results || []).slice(0, 7)} 
           isLoading={topRatedTvShowsLoading}
           type="tv"
         />
         
-        {/* Filmes recentes */}
         <ContentRow 
-          title="Filmes Recentes" 
-          items={nowPlayingMovies?.results || []} 
+          title="Séries Coreanas" 
+          items={(popularTvShows?.results || []).slice(7, 14)} 
+          isLoading={popularTvShowsLoading}
+          type="tv"
+        />
+        
+        <ContentRow 
+          title="Bridgerton" 
+          items={(topRatedTvShows?.results || []).slice(7, 14)} 
+          isLoading={topRatedTvShowsLoading}
+          type="tv"
+        />
+        
+        <ContentRow 
+          title="The Chosen" 
+          items={(popularTvShows?.results || []).slice(2, 9)} 
+          isLoading={popularTvShowsLoading}
+          type="tv"
+        />
+        
+        <ContentRow 
+          title="Cobra Kai" 
+          items={(topRatedTvShows?.results || []).slice(3, 10)} 
+          isLoading={topRatedTvShowsLoading}
+          type="tv"
+        />
+        
+        {/* Filmes recentes solicitados */}
+        <ContentRow 
+          title="A Lista da Minha Vida" 
+          items={(nowPlayingMovies?.results || []).slice(0, 7)} 
+          isLoading={nowPlayingMoviesLoading}
+        />
+        
+        <ContentRow 
+          title="O Mundo Depois de Nós" 
+          items={(popularMovies?.results || []).slice(3, 10)} 
+          isLoading={popularMoviesLoading} 
+        />
+        
+        <ContentRow 
+          title="O Projeto Adam" 
+          items={(topRatedMovies?.results || []).slice(3, 10)} 
+          isLoading={topRatedMoviesLoading} 
+        />
+        
+        {/* Categorias de filmes */}
+        <ContentRow 
+          title="Filmes de Ação" 
+          items={(popularMovies?.results || []).slice(10, 17)} 
+          isLoading={popularMoviesLoading} 
+        />
+        
+        <ContentRow 
+          title="Dramas Baseados em Livros" 
+          items={(topRatedMovies?.results || []).slice(10, 17)} 
+          isLoading={topRatedMoviesLoading} 
+        />
+        
+        <ContentRow 
+          title="Comédias" 
+          items={(nowPlayingMovies?.results || []).slice(7, 14)} 
           isLoading={nowPlayingMoviesLoading}
         />
         
@@ -193,34 +251,6 @@ const Browse = () => {
           title="Em Alta" 
           items={trending?.results || []} 
           isLoading={trendingLoading} 
-        />
-        
-        {/* Filmes de Ação */}
-        <ContentRow 
-          title="Filmes de Ação" 
-          items={(popularMovies?.results || []).slice(5, 15)} 
-          isLoading={popularMoviesLoading} 
-        />
-        
-        {/* Dramas Baseados em Livros */}
-        <ContentRow 
-          title="Dramas Baseados em Livros" 
-          items={(topRatedMovies?.results || []).slice(3, 13)} 
-          isLoading={topRatedMoviesLoading} 
-        />
-        
-        {/* Populares na Netflix */}
-        <ContentRow 
-          title="Populares na Netflix" 
-          items={popularMovies?.results || []} 
-          isLoading={popularMoviesLoading} 
-        />
-        
-        {/* Sugestões para você */}
-        <ContentRow 
-          title="Sugestões para você" 
-          items={topRatedMovies?.results?.slice(10, 20) || []} 
-          isLoading={topRatedMoviesLoading} 
         />
       </main>
     </div>

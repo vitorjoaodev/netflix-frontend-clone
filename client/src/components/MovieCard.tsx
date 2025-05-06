@@ -66,7 +66,7 @@ const MovieCard = ({
       {/* Top 10 badge */}
       {isTop10 && index !== undefined && (
         <div className="top-10-badge">
-          <span className="text-netflix-gold font-bold text-4xl">{index + 1}</span>
+          <span className="text-netflix-gold">{index + 1}</span>
         </div>
       )}
       
