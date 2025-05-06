@@ -3,8 +3,8 @@ import { apiRequest } from "./queryClient";
 export interface Movie {
   id: number;
   title: string;
-  poster_path: string;
-  backdrop_path: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
   overview: string;
   release_date: string;
   vote_average: number;
@@ -25,8 +25,8 @@ export interface MovieDetail extends Movie {
 export interface TvShow {
   id: number;
   name: string;
-  poster_path: string;
-  backdrop_path: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
   overview: string;
   first_air_date: string;
   vote_average: number;
@@ -62,6 +62,13 @@ export interface MoviesResponse {
 export interface TvShowsResponse {
   page: number;
   results: TvShow[];
+  total_results: number;
+  total_pages: number;
+}
+
+export interface TrendingResponse {
+  page: number;
+  results: (Movie | TvShow)[];
   total_results: number;
   total_pages: number;
 }

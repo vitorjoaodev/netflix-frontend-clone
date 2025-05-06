@@ -12,7 +12,12 @@ import {
   fetchTopRatedMovies, 
   fetchNowPlayingMovies,
   fetchPopularTvShows,
-  fetchTopRatedTvShows
+  fetchTopRatedTvShows,
+  Movie,
+  TvShow,
+  TrendingResponse,
+  MoviesResponse,
+  TvShowsResponse
 } from "@/lib/tmdb";
 import { Button } from "@/components/ui/button";
 
@@ -40,37 +45,37 @@ const Browse = () => {
     });
   };
   
-  const { data: trending, isLoading: trendingLoading, error: trendingError } = useQuery({
+  const { data: trending, isLoading: trendingLoading, error: trendingError } = useQuery<TrendingResponse>({
     queryKey: ['/api/trending'],
     staleTime: 10 * 60 * 1000, // 10 minutes
     retry: 1,
   });
   
-  const { data: popularMovies, isLoading: popularMoviesLoading, error: popularMoviesError } = useQuery({
+  const { data: popularMovies, isLoading: popularMoviesLoading, error: popularMoviesError } = useQuery<MoviesResponse>({
     queryKey: ['/api/movies/popular'],
     staleTime: 10 * 60 * 1000,
     retry: 1,
   });
   
-  const { data: topRatedMovies, isLoading: topRatedMoviesLoading, error: topRatedMoviesError } = useQuery({
+  const { data: topRatedMovies, isLoading: topRatedMoviesLoading, error: topRatedMoviesError } = useQuery<MoviesResponse>({
     queryKey: ['/api/movies/top_rated'],
     staleTime: 10 * 60 * 1000,
     retry: 1,
   });
   
-  const { data: nowPlayingMovies, isLoading: nowPlayingMoviesLoading, error: nowPlayingMoviesError } = useQuery({
+  const { data: nowPlayingMovies, isLoading: nowPlayingMoviesLoading, error: nowPlayingMoviesError } = useQuery<MoviesResponse>({
     queryKey: ['/api/movies/now_playing'],
     staleTime: 10 * 60 * 1000,
     retry: 1,
   });
   
-  const { data: popularTvShows, isLoading: popularTvShowsLoading, error: popularTvShowsError } = useQuery({
+  const { data: popularTvShows, isLoading: popularTvShowsLoading, error: popularTvShowsError } = useQuery<TvShowsResponse>({
     queryKey: ['/api/tv/popular'],
     staleTime: 10 * 60 * 1000,
     retry: 1,
   });
   
-  const { data: topRatedTvShows, isLoading: topRatedTvShowsLoading, error: topRatedTvShowsError } = useQuery({
+  const { data: topRatedTvShows, isLoading: topRatedTvShowsLoading, error: topRatedTvShowsError } = useQuery<TvShowsResponse>({
     queryKey: ['/api/tv/top_rated'],
     staleTime: 10 * 60 * 1000,
     retry: 1,
