@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaPencilAlt } from "react-icons/fa";
 import { useAuth } from "@/context/AuthContext";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import AvatarSelector from "./AvatarSelector";
 
 interface ProfileSelectorProps {
   onProfileSelect?: (profileId: number) => void;
@@ -15,7 +16,7 @@ const ProfileSelector = ({
   onProfileSelect,
   isManageMode = false 
 }: ProfileSelectorProps) => {
-  const { profiles, addProfile, deleteProfile, setCurrentProfile } = useAuth();
+  const { profiles, addProfile, deleteProfile, setCurrentProfile, updateProfileAvatar } = useAuth();
   const [isAddProfileOpen, setIsAddProfileOpen] = useState(false);
   const [newProfileName, setNewProfileName] = useState("");
   const { toast } = useToast();
@@ -61,6 +62,15 @@ const ProfileSelector = ({
     }
   };
   
+  const handleAvatarChange = (profileId: number, avatarUrl: string) => {
+    updateProfileAvatar(profileId, avatarUrl);
+    
+    toast({
+      title: "Avatar updated",
+      description: "Your profile avatar has been updated successfully",
+    });
+  };
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
       <div className="text-center">
@@ -83,18 +93,29 @@ const ProfileSelector = ({
                 />
                 
                 {isManageMode && (
-                  <button 
-                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 opacity-0 hover:opacity-100 transition-opacity"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeleteProfile(profile.id, profile.name);
-                    }}
-                  >
-                    <span className="text-white font-bold text-lg">Delete</span>
-                  </button>
+                  <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black bg-opacity-70 opacity-0 hover:opacity-100 transition-opacity">
+                    <button 
+                      className="bg-transparent text-white p-2 rounded-full hover:bg-white/20"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteProfile(profile.id, profile.name);
+                      }}
+                    >
+                      <span className="text-white font-bold">Delete</span>
+                    </button>
+                  </div>
                 )}
               </div>
               <p className="mt-2 text-gray-400 text-lg hover:text-white">{profile.name}</p>
+              
+              {isManageMode && (
+                <div className="flex justify-center mt-2">
+                  <AvatarSelector 
+                    currentAvatar={profile.avatar}
+                    onAvatarChange={(newAvatar) => handleAvatarChange(profile.id, newAvatar)}
+                  />
+                </div>
+              )}
             </div>
           ))}
           

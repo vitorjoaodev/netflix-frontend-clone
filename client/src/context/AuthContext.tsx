@@ -27,12 +27,12 @@ interface AuthContextType {
   updateProfileAvatar: (profileId: number, avatarUrl: string) => void;
 }
 
-// Sample avatar images
+// Official Netflix avatar images
 const avatarImages = [
-  "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120",
-  "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120",
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120",
-  "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&h=120"
+  'https://occ-0-1339-1340.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABXvWywfWS7XtQC8VHdOJLQYw5DYDZt3T6NvxBK2YZ-gpE_6yIH7VP2-NeBPEM2n7Ddct8EYQat0bm-Kn3v9qyPLY1XSL.png?r=110',
+  'https://occ-0-1339-1340.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABSHZrjJ2hGrDiHLhh7hjHDFQWZIKCPJrM-Wwh2FC9kbLATHoEXUTyzO9iq-Dsj-5UQDDQezOkqFU2wm-PXB-fGo4f1_k.png?r=fcd',
+  'https://occ-0-1339-1340.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABcFszWr4vPYAP2CPx4qzs0D2TDTlayCTtXOCp9T5hbQML6xEf8oybWuQoJOFZhBz0WEBM51Z3rCQSOUht9F9Jxl7k6cR.png?r=a13',
+  'https://occ-0-1339-1340.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABUCq3mMjbcd69jdwHnTaCw1LyFWMJcfM1I7CE9KGDG-0mT6tBsB9p6a3lRQJCXvFfl5OIJGwxU-RAKzYQls1QMzwhDw8.png?r=2db'
 ];
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -203,9 +203,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (process.env.NODE_ENV === 'development' && !isAuthenticated) {
       const mockProfiles = [
-        { id: 1, name: "John", avatar: avatarImages[0] },
-        { id: 2, name: "Sarah", avatar: avatarImages[1] },
-        { id: 3, name: "Michael", avatar: avatarImages[2] },
+        { id: 1, name: "User 1", avatar: avatarImages[0] },
+        { id: 2, name: "User 2", avatar: avatarImages[1] },
+        { id: 3, name: "User 3", avatar: avatarImages[2] },
         { id: 4, name: "Kids", avatar: avatarImages[3] },
       ];
       
