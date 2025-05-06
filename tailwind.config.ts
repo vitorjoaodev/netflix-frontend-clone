@@ -50,6 +50,7 @@ export default {
           "dark-gray": "hsl(var(--netflix-dark-gray))",
           "light-black": "hsl(var(--netflix-light-black))",
           gold: "hsl(var(--netflix-gold))",
+          gray: "hsl(var(--netflix-gray))",
         },
         chart: {
           "1": "hsl(var(--chart-1))",
