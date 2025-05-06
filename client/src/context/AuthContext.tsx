@@ -203,9 +203,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (process.env.NODE_ENV === 'development' && !isAuthenticated) {
       const mockProfiles = [
-        { id: 1, name: "John", avatar: "https://i.redd.it/yble0xdfermy.jpg" },
-        { id: 2, name: "Sarah", avatar: "https://wallpapers.com/images/hd/netflix-profile-pictures-5yup5hd2i60x7ew3.jpg" },
-        { id: 3, name: "Michael", avatar: "https://i.pinimg.com/474x/32/3e/cc/323ecca68b7105d23184e783b86b0c5a.jpg" },
+        { id: 1, name: "John", avatar: "/assets/profiles/robot.webp" },
+        { id: 2, name: "Sarah", avatar: "/assets/profiles/orange.jpg" },
+        { id: 3, name: "Michael", avatar: "/assets/profiles/green.jpg" },
         { id: 4, name: "Kids", avatar: "https://images.squarespace-cdn.com/content/v1/60999fca51ffc84d9d5d7acc/1d47c1c5-3a60-4847-8047-387501b3cee1/Screenshot+2024-09-25+at+1.42.30%E2%80%AFPM.png" },
       ];
       
