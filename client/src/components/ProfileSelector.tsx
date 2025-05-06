@@ -172,7 +172,7 @@ const ProfileSelector = ({
           }`}
           onClick={() => window.location.href = isManageMode ? "/profiles" : "/profiles?manage=true"}
         >
-          {isManageMode ? "Done" : "Gerenciar Perfis"}
+          {isManageMode ? "Done" : "Manage Profiles"}
         </Button>
       </div>
     </div>
