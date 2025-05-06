@@ -165,10 +165,14 @@ const ProfileSelector = ({
         </div>
         
         <Button 
-          className="mt-12 border border-gray-400 text-gray-400 px-4 py-2 hover:text-white hover:border-white bg-transparent"
+          className={`mt-12 px-6 py-3 text-lg font-medium ${
+            isManageMode 
+              ? "border border-gray-400 text-gray-400 hover:text-white hover:border-white bg-transparent" 
+              : "bg-netflix-red hover:bg-[#f40612] text-white"
+          }`}
           onClick={() => window.location.href = isManageMode ? "/profiles" : "/profiles?manage=true"}
         >
-          {isManageMode ? "Done" : "Manage Profiles"}
+          {isManageMode ? "Done" : "Gerenciar Perfis"}
         </Button>
       </div>
     </div>

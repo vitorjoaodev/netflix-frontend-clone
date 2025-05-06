@@ -31,16 +31,16 @@ const AvatarSelector = ({ currentAvatar, onAvatarChange }: AvatarSelectorProps) 
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button 
-          variant="ghost" 
+          variant="default" 
           size="sm" 
-          className="flex items-center text-gray-400 hover:text-white bg-transparent"
+          className="flex items-center bg-netflix-red hover:bg-[#f40612] text-white"
         >
-          <LuPencil className="mr-1" /> Edit
+          <LuPencil className="mr-1" /> Mudar Avatar
         </Button>
       </DialogTrigger>
       
       <DialogContent className="bg-netflix-black border border-gray-800 text-white p-6 max-w-4xl">
-        <h2 className="text-2xl font-bold mb-6">Select an Avatar</h2>
+        <h2 className="text-2xl font-bold mb-6">Selecione um Avatar</h2>
         
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {avatarOptions.map((avatar, index) => (
