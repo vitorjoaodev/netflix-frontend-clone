@@ -95,11 +95,32 @@ const MovieCard = ({
             <div 
               className="w-full aspect-video bg-cover bg-center relative transition-all duration-300"
               style={{ 
-                backgroundImage: `url(${getImageUrl(backdropPath || posterPath, 'w780')})`,
                 aspectRatio: '16/9',
               }}
             >
-              {/* Simulating video player UI */}
+              {/* Actual video player - YouTube embed simulando trailer da Netflix */}
+              {isTrailerPlaying && (
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src={`https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&modestbranding=1&playlist=dQw4w9WgXcQ`}
+                  title={`${title} trailer`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              )}
+
+              {/* Fallback se o vídeo não carregar */}
+              {!isTrailerPlaying && (
+                <div 
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ 
+                    backgroundImage: `url(${getImageUrl(backdropPath || posterPath, 'w780')})`,
+                  }}
+                ></div>
+              )}
+
+              {/* UI elements para o player */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/0">
                 <div className="absolute top-1 right-1 bg-black/70 text-white px-1 text-xs rounded">
                   {isTrailerPlaying ? "Preview" : ""}
