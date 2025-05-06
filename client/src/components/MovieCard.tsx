@@ -47,30 +47,37 @@ const MovieCard = ({
   ][Math.floor(Math.random() * 5)];
 
   return (
-    <div 
-      className="netflix-card flex-none w-[160px] sm:w-[180px] md:w-[200px] relative rounded overflow-hidden hover:z-10"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-        transition: 'transform 0.3s ease'
-      }}
-    >
-      <img 
-        src={getImageUrl(posterPath, 'w500')} 
-        alt={title} 
-        className="w-full h-auto object-cover aspect-[2/3]"
-        loading="lazy"
-      />
+    <div className="flex flex-col">
+      <div 
+        className="netflix-card flex-none w-[160px] sm:w-[180px] md:w-[200px] relative rounded overflow-hidden hover:z-10"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{
+          transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+          transition: 'transform 0.3s ease'
+        }}
+      >
+        <img 
+          src={getImageUrl(posterPath, 'w500')} 
+          alt={title} 
+          className="w-full h-auto object-cover aspect-[2/3]"
+          loading="lazy"
+        />
+        
+        {/* Top 10 badge */}
+        {isTop10 && index !== undefined && (
+          <div className="top-10-badge">
+            <span className="text-netflix-gold">{index + 1}</span>
+          </div>
+        )}
+      </div>
       
-      {/* Top 10 badge */}
-      {isTop10 && index !== undefined && (
-        <div className="top-10-badge">
-          <span className="text-netflix-gold">{index + 1}</span>
-        </div>
-      )}
+      {/* Title beneath the card */}
+      <div className="text-sm text-gray-300 mt-2 max-w-[160px] sm:max-w-[180px] md:max-w-[200px] truncate">
+        {title}
+      </div>
       
-      {/* Progress bar for continue watching */}
+      {/* Progress bar for continue watching - moved inside card div */}
       {showProgress && (
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-600">
           <div className="h-full bg-netflix-red" style={{ width: `${progress}%` }}></div>

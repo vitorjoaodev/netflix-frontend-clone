@@ -1,7 +1,6 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import MovieCard from './MovieCard';
 import { Movie, TvShow } from '@/lib/tmdb';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 interface ContentRowProps {
   title: string;
@@ -21,27 +20,6 @@ const ContentRow = ({
   isTop10 = false
 }: ContentRowProps) => {
   const sliderRef = useRef<HTMLDivElement>(null);
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (!sliderRef.current) return;
-    
-    const { scrollLeft, clientWidth } = sliderRef.current;
-    const scrollTo = direction === 'left' 
-      ? scrollLeft - clientWidth * 0.75
-      : scrollLeft + clientWidth * 0.75;
-    
-    sliderRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
-  };
-
-  const handleScroll = () => {
-    if (!sliderRef.current) return;
-    
-    const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
-    setShowLeftArrow(scrollLeft > 0);
-    setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
-  };
 
   // Handle loading state
   if (isLoading) {
@@ -69,8 +47,7 @@ const ContentRow = ({
       <div className="relative group">
         <div 
           ref={sliderRef} 
-          className="carousel flex space-x-2 overflow-x-auto pl-4 pr-4 pb-4"
-          onScroll={handleScroll}
+          className="carousel flex flex-wrap gap-4 pl-4 pr-4 pb-4"
         >
           {items.map((item, index) => (
             <MovieCard 
