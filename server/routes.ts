@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { tmdbAPI } from "./tmdb";
 import { z } from "zod";
 import { insertUserSchema } from "@shared/schema";
+import { setupGraphQL } from "./graphql";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Authentication routes
@@ -272,6 +273,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to fetch TV genres" });
     }
   });
+
+  // Setup GraphQL endpoint
+  setupGraphQL(app);
 
   const httpServer = createServer(app);
 

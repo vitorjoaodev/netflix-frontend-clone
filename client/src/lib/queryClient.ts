@@ -23,6 +23,40 @@ export async function apiRequest(
   return res;
 }
 
+// New GraphQL query function
+export async function graphqlRequest<T = any>(
+  query: string,
+  variables?: Record<string, any>,
+  authToken?: string,
+): Promise<T> {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  
+  if (authToken) {
+    headers['Authorization'] = `Bearer ${authToken}`;
+  }
+  
+  const res = await fetch('/graphql', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      query,
+      variables,
+    }),
+    credentials: 'include',
+  });
+  
+  await throwIfResNotOk(res);
+  const { data, errors } = await res.json();
+  
+  if (errors) {
+    throw new Error(errors[0].message);
+  }
+  
+  return data;
+}
+
 type UnauthorizedBehavior = "returnNull" | "throw";
 export const getQueryFn: <T>(options: {
   on401: UnauthorizedBehavior;
