@@ -15,7 +15,6 @@ Um clone completo da interface da Netflix, desenvolvido com React, Express e TMD
 - **Gerenciamento de Perfis**: Sistema completo com múltiplos perfis e avatares personalizados
 - **Conteúdo Real**: Integração com TMDB API para exibição de filmes e séries atuais
 - **Categorias Dinâmicas**: Exibição de conteúdo organizado por categorias
-- **Progressive Web App (PWA)**: Suporte para instalação e funcionamento offline
 - **UI/UX Autêntico**: Recriação fiel dos elementos visuais da Netflix:
   - Hero section com destaque para conteúdo selecionado
   - Carrosséis de conteúdo com navegação horizontal

@@ -11,28 +11,11 @@
     <meta property="og:title" content="Netflix Clone | Watch TV Shows & Movies" />
     <meta property="og:description" content="Watch unlimited TV shows and movies on your favorite devices. Stream the latest releases, trending shows, and exclusive originals." />
     <meta property="og:type" content="website" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#E50914" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
     <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
-    
-    <!-- Service Worker Registration -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/service-worker.js')
-            .then(registration => {
-              console.log('Service Worker registered with scope:', registration.scope);
-            })
-            .catch(error => {
-              console.error('Service Worker registration failed:', error);
-            });
-        });
-      }
-    </script>
   </body>
 </html>
