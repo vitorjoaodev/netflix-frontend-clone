@@ -6,6 +6,7 @@ import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Browse from "@/pages/Browse";
 import ProfileSelect from "@/pages/ProfileSelect";
+import GraphQLTestPage from "@/pages/GraphQLTestPage";
 import { AuthProvider } from "./context/AuthContext";
 import Footer from "./components/Footer";
 
@@ -20,6 +21,7 @@ function Router() {
           <Route path="/login" component={Login} />
           <Route path="/browse" component={Browse} />
           <Route path="/profiles" component={ProfileSelect} />
+          <Route path="/graphql-test" component={GraphQLTestPage} />
           <Route component={NotFound} />
         </Switch>
       </div>
