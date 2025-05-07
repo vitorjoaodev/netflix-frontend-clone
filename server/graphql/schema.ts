@@ -166,12 +166,12 @@ const resolvers = {
     similarMovies: async (_: any, { id }: { id: number }) => tmdbAPI.getSimilarMovies(id),
     similarTvShows: async (_: any, { id }: { id: number }) => tmdbAPI.getSimilarTvShows(id),
     movieGenres: async () => {
-      const { genres } = await tmdbAPI.getMovieGenres();
-      return genres;
+      const response = await tmdbAPI.getMovieGenres();
+      return (response as any).genres || [];
     },
     tvGenres: async () => {
-      const { genres } = await tmdbAPI.getTvGenres();
-      return genres;
+      const response = await tmdbAPI.getTvGenres();
+      return (response as any).genres || [];
     },
     search: async (_: any, { query }: { query: string }) => tmdbAPI.search(query)
   },
