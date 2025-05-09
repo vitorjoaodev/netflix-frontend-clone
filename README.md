@@ -6,6 +6,9 @@
 
 Um clone completo da interface da Netflix, desenvolvido com React, Express e TMDB API. Este projeto recria fielmente a experiência visual e de navegação da plataforma Netflix.
 
+Senha para entrar, login: Email: user@example.com
+Senha: password
+
 ![Netflix Clone Screenshot](client/public/assets/images%20(9).jpg)
 
 ## 🌟 Características
