@@ -84,14 +84,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (email: string, password: string) => {
     try {
       const res = await apiRequest("POST", "/api/auth/login", { email, password });
-      const userData = await res.json();
       
-      setUser(userData);
-      setProfiles(userData.profiles);
-      setIsAuthenticated(true);
-      
-      return userData;
+      try {
+        const userData = await res.json();
+        
+        setUser(userData);
+        setProfiles(userData.profiles || []);
+        setIsAuthenticated(true);
+        
+        return userData;
+      } catch (jsonError) {
+        console.error("JSON parsing error:", jsonError);
+        throw new Error("Failed to parse the server response. Please try again later.");
+      }
     } catch (error) {
+      console.error("Login error:", error);
       throw new Error((error as Error).message || "Failed to log in");
     }
   };
@@ -99,26 +106,33 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signup = async (email: string, password: string) => {
     try {
       const res = await apiRequest("POST", "/api/auth/signup", { email, password });
-      const userData = await res.json();
       
-      // Create default profile
-      const defaultProfile = {
-        id: 1,
-        name: "User",
-        avatar: avatarImages[0]
-      };
-      
-      const userWithProfiles = {
-        ...userData,
-        profiles: [defaultProfile]
-      };
-      
-      setUser(userWithProfiles);
-      setProfiles([defaultProfile]);
-      setIsAuthenticated(true);
-      
-      return userWithProfiles;
+      try {
+        const userData = await res.json();
+        
+        // Create default profile
+        const defaultProfile = {
+          id: 1,
+          name: "User",
+          avatar: avatarImages[0]
+        };
+        
+        const userWithProfiles = {
+          ...userData,
+          profiles: userData.profiles || [defaultProfile]
+        };
+        
+        setUser(userWithProfiles);
+        setProfiles(userWithProfiles.profiles);
+        setIsAuthenticated(true);
+        
+        return userWithProfiles;
+      } catch (jsonError) {
+        console.error("JSON parsing error:", jsonError);
+        throw new Error("Failed to parse the server response. Please try again later.");
+      }
     } catch (error) {
+      console.error("Signup error:", error);
       throw new Error((error as Error).message || "Failed to sign up");
     }
   };

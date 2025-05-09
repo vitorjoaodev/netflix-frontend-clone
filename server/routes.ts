@@ -22,8 +22,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Create user
       const user = await storage.createUser(validatedData);
       
-      // Don't send password back to client
-      const { password, ...userWithoutPassword } = user;
+      // Don't send password back to client - usando uma abordagem segura
+      const userWithoutPassword = {
+        id: user.id,
+        username: user.username
+      };
       
       return res.status(201).json({
         ...userWithoutPassword,
@@ -67,7 +70,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       // Don't send password back to client
-      const { password, ...userWithoutPassword } = user;
+      // Importante: Usando uma desestruturação segura para evitar erros
+      const userWithoutPassword = {
+        id: user.id,
+        username: user.username
+      };
       
       return res.status(200).json({
         ...userWithoutPassword,
